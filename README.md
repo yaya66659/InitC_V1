@@ -30,13 +30,13 @@
 ### Compilation
 Utilise `gcc` pour compiler le programme :
 ```sh
-gcc -o initC_V1 initC_V1.c
+gcc -o bin/initC_V1 src/*.c
 ```
 
 ### Utilisation
 Exécute simplement le programme :
 ```sh
-./initC_V1
+bin\initC_V1.exe
 ```
 Puis, suis les instructions pour créer un nouveau projet.
 
