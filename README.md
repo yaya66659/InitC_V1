@@ -56,8 +56,22 @@ bin\initC_V1.exe
 ```
 Puis, suis les instructions pour créer un nouveau projet.
 
-## Licence
-Ce projet est sous licence MIT. Tu es libre de l'utiliser et de le modifier.
+## 📩 Contact
+Si vous avez des suggestions ou des retours, contactez-moi sur **[GitHub Issues](https://github.com/yaya66659/BlocKeyboard/issues)** ou par mail : **yann55446@gmail.com**.  
+
+
+## 📜 Licence
+
+Ce projet est sous licence **GNU General Public License v3.0 (GPL v3)**.  
+Vous êtes libre de l’utiliser, le modifier et le redistribuer sous les termes de cette licence.  
+
+📌 **Résumé des conditions principales** :
+- Vous **pouvez modifier** et redistribuer le programme.
+- Toute version modifiée **doit rester sous GPL v3**.
+- Ce programme est fourni **"tel quel", sans garantie**.  
+
+🔗 Texte complet de la licence : [LICENSE](LICENSE)  
+🔗 Plus d’informations : [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)  
 
 ## Auteur
 Développé par **yann PICHAT**.
