@@ -23,6 +23,15 @@
 - Préremplit les fichiers `.c` et `.h` avec le code minimal obligatoire.
 - Ouvre automatiquement le projet dans Visual Studio Code après sa création.
 
+  ## 📸 Aperçu
+
+Voici à quoi ressemble **InitC_V1** :
+
+### Interface principale
+![Interface principale](screenshots/ScreenInitC_V1.png)
+
+
+
 ## Installation
 ### Téléchargement et Exécution
 1. Télécharge le programme sous forme de fichier ZIP. https://github.com/yaya66659/InitC_V1/blob/main/InitC_V1.7z
