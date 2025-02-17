@@ -25,7 +25,7 @@
 
 ## Installation
 ### Téléchargement et Exécution
-1. Télécharge le programme sous forme de fichier ZIP.
+1. Télécharge le programme sous forme de fichier ZIP. https://github.com/yaya66659/InitC_V1/blob/main/InitC_V1.7z
 2. Décompresse le dossier ZIP.
 3. Double-clique sur `InitC_V1.exe` pour l'exécuter.
 4. Puis, suis les instructions pour créer un nouveau projet.
