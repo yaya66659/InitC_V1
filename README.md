@@ -26,6 +26,7 @@
 1. Télécharge le programme sous forme de fichier ZIP.
 2. Décompresse le dossier ZIP.
 3. Double-clique sur `InitC_V1.exe` pour l'exécuter.
+4. Puis, suis les instructions pour créer un nouveau projet.
 
 ### Compilation
 Utilise `gcc` pour compiler le programme :
