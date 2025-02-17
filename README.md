@@ -1,7 +1,9 @@
 # initC_V1
+(compatible Windows uniquement)
+
 
 ## Description
-**initC_V1** est un programme en langage C permettant de créer rapidement la structure d'un projet console en C. Il automatise la création des dossiers et fichiers nécessaires, avec un code de base prérempli.
+**initC_V1** est un programme pour Windows en langage C permettant de créer rapidement la structure d'un projet console en C. Il automatise la création des dossiers et fichiers nécessaires, avec un code de base prérempli.
 
 ## Fonctionnalités
 - Demande le nom du projet.
@@ -10,7 +12,7 @@
   ```
   projets/
   ├── [nom_du_projet]/
-      ├── bin/       # Contient l'exécutable
+      ├── bin/       # Contient l'exécutable 
       ├── src/       # Contient les fichiers source .c
           ├── main.c
           ├── fct.c
@@ -31,10 +33,23 @@
 ### Compilation
 Utilise `gcc` pour compiler le programme :
 ```sh
+cd mon_chemmin_ver_le_dossier/InitC_V1
 gcc -o bin/initC_V1 src/*.c
 ```
+Ou avec le Makefile :
+```sh
+make all
+```
+#Pour nettoyer le dossier obj (efface tout les fichier object)
+```sh
+make clean
+```
+#Pour nettoyer tout (le fichier .o et l'executable)
+```sh
+make cleanall
+```
 
-### Utilisation
+### Utilisation (compatible Windows uniquement)
 Exécute simplement le programme :
 ```sh
 bin\initC_V1.exe
