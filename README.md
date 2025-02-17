@@ -1,5 +1,8 @@
 # initC_V1
+![Status](https://img.shields.io/badge/Status-Beta-yellow?style=for-the-badge)
+
 (compatible Windows uniquement)
+
 
 
 ## Description
