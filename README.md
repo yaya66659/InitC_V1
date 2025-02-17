@@ -28,7 +28,7 @@
 Voici à quoi ressemble **InitC_V1** :
 
 ### Interface principale
-![Interface principale](screenshots/ScreenInitC_V1.png)
+![Interface principale](screenshot/ScreenInitC_V1.png)
 
 
 
