@@ -19,6 +19,7 @@
       ├── Makefile   # Fichier Makefile généré automatiquement
   ```
 - Préremplit les fichiers `.c` et `.h` avec le code minimal obligatoire.
+- Ouvre automatiquement le projet dans Visual Studio Code après sa création.
 
 ## Installation
 ### Téléchargement et Exécution
