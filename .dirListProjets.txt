@@ -1,7 +1,0 @@
-<<<<<<< HEAD
-yann
-yann2
-=======
-yann
-yann2
->>>>>>> 12271860fbdb609500fab09e1e8a64ddddffc996

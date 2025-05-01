@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 CC = gcc
-EXEC = bin/InitC
+EXEC = bin/InitC_V2
 SRC = $(wildcard src/*.c)
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 
@@ -17,25 +17,4 @@ clean :
 	for %%f in (obj\*.o)do del /F /Q "%%f"
 
 cleanall : clean
-	del /F /Q bin\InitC.exe
-=======
-CC = gcc
-EXEC = bin/progInitC
-SRC = $(wildcard src/*.c)
-OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
-
-# Compilation
-all: $(EXEC)
-
-$(EXEC): $(OBJ)
-	$(CC) -o $@ $^
-
-obj/%.o: src/%.c
-	$(CC) -c $< -o $@
-
-clean :
-	for %%f in (obj\*.o)do del /F /Q "%%f"
-
-cleanall : clean
-	del /F /Q bin\progInitC.exe
->>>>>>> 12271860fbdb609500fab09e1e8a64ddddffc996
+	del /F /Q bin\InitC_V2.exe

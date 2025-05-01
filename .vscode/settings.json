@@ -12,6 +12,9 @@
         "i3/*.conf": "i3",
         "polybar/config": "ini",
         "polybar/*.conf": "ini",
-        "fct.h": "c"
-    }
+        "fct.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c"
+    },
+    "makefile.configureOnOpen": false
 }
