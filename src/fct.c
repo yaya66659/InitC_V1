@@ -69,7 +69,7 @@ bool creeProjet(const char *nomProjet)
     char chemin[BUFFER_TEXTE_MAX];
 
     /*****************CREATION DES DOSSIER ET SOUS DOSSIER  */
-    if (creeDossier(cheminTemp) != 1)
+    if (!creeDossier(cheminTemp))
     {
 
         printf("Erreur creation %s\n", cheminTemp);
@@ -77,7 +77,7 @@ bool creeProjet(const char *nomProjet)
     }
 
     snprintf(chemin, sizeof(chemin), "%s\\bin", cheminTemp);
-    if (creeDossier(chemin) != 1)
+    if (!creeDossier(chemin))
     {
         supprimerDossierRecursif(cheminTemp);
         printf("Erreur création %s\n", chemin);
@@ -85,7 +85,7 @@ bool creeProjet(const char *nomProjet)
     }
 
     snprintf(chemin, sizeof(chemin), "%s\\src", cheminTemp);
-    if (creeDossier(chemin) != 1)
+    if (!creeDossier(chemin))
     {
         supprimerDossierRecursif(cheminTemp);
         printf("Erreur création %s\n", chemin);
@@ -93,14 +93,14 @@ bool creeProjet(const char *nomProjet)
     }
 
     snprintf(chemin, sizeof(chemin), "%s\\obj", cheminTemp);
-    if (creeDossier(chemin) != 1)
+    if (!creeDossier(chemin))
     {
         supprimerDossierRecursif(cheminTemp);
         printf("Erreur création %s\n", chemin);
         return false;
     }
     snprintf(chemin, sizeof(chemin), "%s\\src\\headers", cheminTemp);
-    if (creeDossier(chemin) != 1)
+    if (!creeDossier(chemin))
     {
         supprimerDossierRecursif(cheminTemp);
         printf("Erreur création %s\n", chemin);
@@ -109,7 +109,7 @@ bool creeProjet(const char *nomProjet)
 
     /**********COPIE DES FICHIER MODEL**************** */
     snprintf(chemin, sizeof(chemin), "%s\\src\\main.c", cheminTemp);
-    if (copierFichier("model\\main.c", chemin) != 1)
+    if (!copierFichier("model\\main.c", chemin))
     {
         supprimerDossierRecursif(cheminTemp);
         printf("Erreur copie %s\n", chemin);
@@ -117,7 +117,7 @@ bool creeProjet(const char *nomProjet)
     }
 
     snprintf(chemin, sizeof(chemin), "%s\\src\\fct.c", cheminTemp);
-    if (copierFichier("model\\fct.c", chemin) != 1)
+    if (!copierFichier("model\\fct.c", chemin))
     {
         supprimerDossierRecursif(cheminTemp);
         printf("Erreur copie %s\n", chemin);
