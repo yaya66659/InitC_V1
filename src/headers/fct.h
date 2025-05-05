@@ -20,10 +20,11 @@
 
 #include <stdbool.h>
 
+#define TAILLE_FORMAT_NOM_PROJET 30
 #define BUFFER_TEXTE_MAX 256
-
 #define BUFFER_CHEMIN_MAX 512
 
+#define DEBUT_NOM_PROJET_TEMPORAIRE "temporary_"
 #define NOM_FICHIER_TAMPON ".dirListProjets.txt"
 
 void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie);
@@ -37,6 +38,7 @@ int copierFichier(const char *source, const char *destination);
 int supprimerFichier(const char *chemin);
 bool nomDeProjetEstPermit(const char *nomProjet);
 bool ecritSecurisationsFctH(const char *cheminProjetTemp, const char *nomProjet);
-bool nomDeProjetExiste(const char * nomProjet);
-
+bool nomDeProjetExiste(const char *nomProjet);
+bool nomDeProjetInterdit(const char *nomProjet);
+bool symboleInterditDansNomDeProjet(const char *nomProjet);
 #endif /* H_FCT__04052025__YPI*/

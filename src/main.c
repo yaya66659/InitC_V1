@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "headers/fct.h"
 int main(int argc, char *argv[])
@@ -25,15 +26,14 @@ int main(int argc, char *argv[])
 
     activeAffichageUTF8DansLaConsole(false);
     int retScanf = 0;
-    int retScanf2 = 0;
-    bool er1 = false;
-    bool er2 = false;
 
-    char messageErreur1[BUFFER_TEXTE_MAX] = "Nom du projet incorrecte ou déjà existant\n";
-    char messageErreur2[BUFFER_TEXTE_MAX] = "Erreur saisir O pour oui N pour non(O/N|o/n)\n";
+    bool er = false;
 
     char makefile = ' ';
     char nomProjet[BUFFER_TEXTE_MAX];
+    char format[TAILLE_FORMAT_NOM_PROJET];
+
+    snprintf(format, sizeof(format), "%%%ds", (int)sizeof(nomProjet) - 1);
     printf("\t\tInitC\n");
 
     printf("Crée votre projet console en C rapidement .\n");
@@ -41,49 +41,53 @@ int main(int argc, char *argv[])
     while (1)
     {
 
-        if (er1)
+        if (er)
         {
-            printf("%s", messageErreur1);
+            printf("Nom du projet incorrecte ou déjà existant\n");
         }
         printf("Nom du Projet: ");
 
-        retScanf = scanf("%[A-Za-z0-9_-]255s", nomProjet);
+        retScanf = scanf(format, nomProjet);
+
         videBuffer();
 
-        if (retScanf == 1 && !nomDeProjetExiste(nomProjet) && nomDeProjetEstPermit(nomProjet))
+        if (retScanf == 1 && !nomDeProjetExiste(nomProjet) && nomDeProjetEstPermit(nomProjet) && !nomDeProjetInterdit(nomProjet) && !symboleInterditDansNomDeProjet(nomProjet))
         {
 
             printf("le projet %s sera crée\n", nomProjet);
             if (!creeProjet(nomProjet))
             {
+
                 printf("Erreur creation projet : %s\n", nomProjet);
                 return 1;
             }
+            er = false;
             break;
         }
         else
         {
-            er1 = true;
+            er = true;
         }
     }
 
     while (1)
     {
-        printf("Vous-les vous un MakeFile dans votre Projet %s, O pour oui N pour non(O/N|o/n\n", nomProjet);
-        if (er2)
-            printf("%s", messageErreur2);
+        printf("Voules-vous un MakeFile dans votre Projet %s, O pour oui N pour non(O/N|o/n)\n", nomProjet);
+        if (er)
+            printf("Erreur saisir O pour oui N pour non(O/N|o/n)\n");
 
         printf(">");
-        retScanf2 = scanf("%1[ONon]c", &makefile);
+        retScanf = scanf("%1[ONon]c", &makefile);
         videBuffer();
 
-        if (retScanf2 == 1)
+        if (retScanf == 1)
         {
+            er = false;
             break;
         }
         else
         {
-            er2 = true;
+            er = true;
         }
     }
 

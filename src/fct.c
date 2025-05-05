@@ -61,7 +61,7 @@ bool creeProjet(const char *nomProjet)
 {
     /********DEFINITION D4UN NOM TEMPORAIRE POUR L PROJET****************/
     char tempName[BUFFER_TEXTE_MAX];
-    snprintf(tempName, sizeof(tempName), "temporary_%s_temp", nomProjet);
+    snprintf(tempName, sizeof(tempName), "%s%s_temp", DEBUT_NOM_PROJET_TEMPORAIRE, nomProjet);
 
     char cheminTemp[BUFFER_TEXTE_MAX];
     snprintf(cheminTemp, sizeof(cheminTemp), "projets\\%s", tempName);
@@ -155,9 +155,6 @@ bool creeMakeFile(const char *nomProjet)
     int retFprintfMakeFile = 0;
     char cheminFicMakefile[BUFFER_CHEMIN_MAX];
 
-    char printMakefile[10000];
-    snprintf(printMakefile, sizeof(printMakefile), "CC = gcc\nEXEC = bin/%s\nSRC = $(wildcard src/*.c)\nOBJ = $(patsubst src/%%.c,obj/%%.o,$(SRC))\n\n# Compilation\nall: $(EXEC)\n\n$(EXEC): $(OBJ)\n\t$(CC) -o $@ $^\n\nobj/%%.o: src/%%.c\n\t$(CC) -c $< -o $@\n\nclean :\n\tfor %%%%f in (obj\\*.o)do del /F /Q \"%%%%f\"\n\ncleanall : clean\n\tdel /F /Q bin\\%s.exe", nomProjet, nomProjet);
-
     snprintf(cheminFicMakefile, sizeof(cheminFicMakefile), "projets\\%s\\Makefile", nomProjet);
     ficMakefile = fopen(cheminFicMakefile, "w");
     if (ficMakefile == NULL)
@@ -166,12 +163,11 @@ bool creeMakeFile(const char *nomProjet)
         return false;
     }
 
-    retFprintfMakeFile = fprintf(ficMakefile, "%s", printMakefile);
-
-    if (retFprintfMakeFile < 0)
+    if (fprintf(ficMakefile, "CC = gcc\n") < 0 || fprintf(ficMakefile, "EXEC = bin/%s\n", nomProjet) < 0 || fprintf(ficMakefile, "SRC = $(wildcard src/*.c)\n") < 0 || fprintf(ficMakefile, "OBJ = $(patsubst src/%%.c,obj/%%.o,$(SRC))\n") < 0 || fprintf(ficMakefile, "\n") < 0 || fprintf(ficMakefile, "#Compilation\n") < 0 || fprintf(ficMakefile, "all: $(EXEC)\n\n") < 0 || fprintf(ficMakefile, "$(EXEC): $(OBJ)\n") < 0 || fprintf(ficMakefile, "\t$(CC) -o $@ $^\n") < 0 || fprintf(ficMakefile, "\n") < 0 || fprintf(ficMakefile, "obj/%%.o: src/%%.c\n") < 0 || fprintf(ficMakefile, "\t$(CC) -c $< -o $@\n") < 0 || fprintf(ficMakefile, "\n") < 0 || fprintf(ficMakefile, "clean :\n") < 0 || fprintf(ficMakefile, "\tfor %%%%f in (obj\\*.o)do del /F /Q \"%%%%f\"\n") < 0 || fprintf(ficMakefile, "\n") < 0 || fprintf(ficMakefile, "cleanall : clean\n") < 0 || fprintf(ficMakefile, "\tdel /F /Q bin\\%s.exe", nomProjet) < 0)
     {
-        printf("Debug : Erreur makefile  non écrit!\n");
+        printf("Erreur écriture Makefile du projet : %s\n", nomProjet);
         fclose(ficMakefile);
+        supprimerFichier(cheminFicMakefile);
         return false;
     }
 
@@ -288,7 +284,7 @@ int supprimerDossierRecursif(const char *cheminDossier)
 bool nomDeProjetEstPermit(const char *nomProjet)
 {
 
-    if (strncmp("temporary_", nomProjet, 10) == 0 || strstr(nomProjet, "_temp") != NULL)
+    if (strncmp(DEBUT_NOM_PROJET_TEMPORAIRE, nomProjet, strlen(DEBUT_NOM_PROJET_TEMPORAIRE)) == 0 || strstr(nomProjet, "_temp") != NULL)
     {
 
         printf("Nom de projet Non valide 'temporary_%s_temp' (mot-clé temporaire: temporary_xxxx_temp)\n", nomProjet);
@@ -383,6 +379,73 @@ bool nomDeProjetExiste(const char *nomProjet)
     {
         return true; /*il y a pas de projet du même nom*/
     }
-
+    else
+    {
+        DWORD err = GetLastError();
+    }
     return false; /*il y a un projet du même nom*/
+}
+bool nomDeProjetInterdit(const char *nomProjet)
+{
+    /*Liste des nom de projet réservée au système*/
+    const char nomsInterdits[BUFFER_CHEMIN_MAX] = "CON PRN AUX NUL COM1 COM2 COM3 COM4 COM5 COM6 COM7 COM8 COM9 LPT1 LPT2 LPT3 LPT4 LPT5 LPT6 LPT7 LPT8 LPT9";
+    char buffer[BUFFER_TEXTE_MAX];
+    int x = 0;
+    size_t len  = strlen(nomsInterdits);
+
+    for (int i = 0; i <= len; i++)
+    {
+        if (nomsInterdits[i] == ' ' || nomsInterdits[i] == '\0')
+        {
+            buffer[x] = '\0';
+            if (strcmp(nomProjet, buffer) == 0)
+            {
+                printf("Nom de projet %s INTERDIT (réservé au système)\n", nomProjet);
+                return true;
+            }
+
+            x = 0;
+            buffer[0] = '\0';
+        }
+        else
+        {
+            if (x < BUFFER_TEXTE_MAX - 1)
+            {
+                buffer[x++] = nomsInterdits[i];
+            }
+        }
+    }
+
+    return false;
+}
+
+bool symboleInterditDansNomDeProjet(const char *nomProjet)
+{
+    const char caracteresInterdits[BUFFER_TEXTE_MAX] = "< > : \" / \\ | ? *";
+    char buffer[BUFFER_TEXTE_MAX];
+    int x = 0;
+    size_t len  = strlen(caracteresInterdits);
+
+    for (int i = 0; i <= len; i++)
+    {
+
+        if (caracteresInterdits[i] == ' ' || caracteresInterdits[i] == '\0')
+        {
+            buffer[x] = '\0';
+            if (strstr(nomProjet, buffer) != NULL)
+            {
+
+                printf("Un caractère interdit est present dans le nom du projet : '%s' (< > : \" / \\ | ? *)\n", nomProjet);
+                return true;
+            }
+            x = 0;
+            buffer[0] = '\0';
+        }
+        else
+        {
+            buffer[x++] = caracteresInterdits[i];
+        }
+    }
+
+    return false;
 }
