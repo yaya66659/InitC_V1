@@ -19,5 +19,9 @@ void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie)
 {
 
     SetConsoleOutputCP(CP_UTF8); /* Force l'affichage correct des caractères UTF-8*/
-    SetConsoleCP(CP_UTF8);       /* Force l'affichage UTF-8* Pour la saisie*/
+
+    if (activerUTF8pourLaSaisie)
+    {
+        SetConsoleCP(CP_UTF8); /* Force l'affichage UTF-8* Pour la saisie*/
+    }
 }
