@@ -319,7 +319,7 @@ bool ecritSecurisationsFctH(const char *cheminProjetTemp, const char *nomProjet)
     }
 
     /*ÉCRITURES EN TÊTE DE SÉCURISATIONS INCLUSIONS MULTIPLE*/
-    if (fprintf(ficFctH, "#ifndef FCT_%02d%02d%d_%s_H\n", infosLocal->tm_mday, infosLocal->tm_mon + 1, infosLocal->tm_year + 1900, nomProjet) < 0 || fprintf(ficFctH, "#define FCT_%02d%02d%d_%s_H\n", infosLocal->tm_mday, infosLocal->tm_mon + 1, infosLocal->tm_year + 1900, nomProjet) < 0)
+    if (fprintf(ficFctH, "#ifndef FCT_%02d%02d%d_%02d%02d%02d_%s_H\n", infosLocal->tm_mday, infosLocal->tm_mon + 1, infosLocal->tm_year + 1900, infosLocal->tm_hour, infosLocal->tm_min, infosLocal->tm_sec, nomProjet) < 0 || fprintf(ficFctH, "#define FCT_%02d%02d%d_%02d%02d%02d_%s_H\n", infosLocal->tm_mday, infosLocal->tm_mon + 1, infosLocal->tm_year + 1900, infosLocal->tm_hour, infosLocal->tm_min, infosLocal->tm_sec, nomProjet) < 0)
     {
 
         printf("Erreur écriture dans fichier %s de #ifndef et #define\n", cheminFichierFctH);
@@ -356,7 +356,7 @@ bool ecritSecurisationsFctH(const char *cheminProjetTemp, const char *nomProjet)
     }
 
     /*ÉCRITURES FERMETURE DE IFNDEF AVEC ENDIF*/
-    if (fprintf(ficFctH, "\n#endif /*FCT_%02d%02d%d_%s_H*/", infosLocal->tm_mday, infosLocal->tm_mon + 1, infosLocal->tm_year + 1900, nomProjet) < 0)
+    if (fprintf(ficFctH, "\n#endif /*FCT_%02d%02d%d_%02d%02d%02d_%s_H*/", infosLocal->tm_mday, infosLocal->tm_mon + 1, infosLocal->tm_year + 1900, infosLocal->tm_hour, infosLocal->tm_min, infosLocal->tm_sec, nomProjet) < 0)
     {
         printf("Erreur écriture dans fichier %s de #endif\n", cheminFichierFctH);
         fclose(ficFctH);
@@ -391,7 +391,7 @@ bool nomDeProjetInterdit(const char *nomProjet)
     const char nomsInterdits[BUFFER_CHEMIN_MAX] = "CON PRN AUX NUL COM1 COM2 COM3 COM4 COM5 COM6 COM7 COM8 COM9 LPT1 LPT2 LPT3 LPT4 LPT5 LPT6 LPT7 LPT8 LPT9";
     char buffer[BUFFER_TEXTE_MAX];
     int x = 0;
-    size_t len  = strlen(nomsInterdits);
+    size_t len = strlen(nomsInterdits);
 
     for (int i = 0; i <= len; i++)
     {
@@ -424,7 +424,7 @@ bool symboleInterditDansNomDeProjet(const char *nomProjet)
     const char caracteresInterdits[BUFFER_TEXTE_MAX] = "< > : \" / \\ | ? *";
     char buffer[BUFFER_TEXTE_MAX];
     int x = 0;
-    size_t len  = strlen(caracteresInterdits);
+    size_t len = strlen(caracteresInterdits);
 
     for (int i = 0; i <= len; i++)
     {
