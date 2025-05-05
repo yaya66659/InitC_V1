@@ -1,5 +1,5 @@
 CC = gcc
-EXEC = bin/yann02_temp
+EXEC = bin/yannFinal000
 SRC = $(wildcard src/*.c)
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 
@@ -16,4 +16,4 @@ clean :
 	for %%f in (obj\*.o)do del /F /Q "%%f"
 
 cleanall : clean
-	del /F /Q bin\yann02_temp.exe
+	del /F /Q bin\yannFinal000.exe

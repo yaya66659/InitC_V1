@@ -14,7 +14,8 @@
         "polybar/*.conf": "ini",
         "fct.h": "c",
         "stdlib.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdbool.h": "c"
     },
     "makefile.configureOnOpen": false
 }
