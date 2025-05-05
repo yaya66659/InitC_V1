@@ -25,7 +25,7 @@
 #define BUFFER_CHEMIN_MAX 512
 
 #define DEBUT_NOM_PROJET_TEMPORAIRE "temporary_"
-#define NOM_FICHIER_TAMPON ".dirListProjets.txt"
+
 
 void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie);
 bool creeProjet(const char *nomProjet);
